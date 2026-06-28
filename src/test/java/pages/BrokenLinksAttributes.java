@@ -12,8 +12,8 @@ import java.net.URL;
 import java.util.List;
 
 public class BrokenLinksAttributes {
-    //how to handle Broken Links
     WebDriver driver;
+    //Attributes
     @FindBy(tagName = "a")
     List<WebElement> links;
 
