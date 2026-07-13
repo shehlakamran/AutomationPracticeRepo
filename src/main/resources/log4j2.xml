@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN">
+
+    <Appenders>
+
+        <!-- Console Output -->
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d{HH:mm:ss} %-5level [%c{1}] - %msg%n"/>
+        </Console>
+
+        <!-- Main Log File (simple log) -->
+        <File name="FileLogger"
+              fileName="${sys:user.dir}/logs/automation-main.log"
+              append="true">
+            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss} %-5level [%c{1}] - %msg%n"/>
+        </File>
+
+        <!-- Daily Rolling Log File -->
+        <RollingFile name="RollingFile"
+                     fileName="${sys:user.dir}/logs/automation.log"
+                     filePattern="${sys:user.dir}/logs/automation-%d{yyyy-MM-dd}.log">
+            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss} %-5level [%c{1}] - %msg%n"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1" modulate="true"/>
+            </Policies>
+        </RollingFile>
+
+    </Appenders>
+
+    <Loggers>
+
+        <!-- Logger for your test classes -->
+        <Logger name="tests" level="info" additivity="false">
+            <AppenderRef ref="Console"/>
+            <AppenderRef ref="RollingFile"/>
+        </Logger>
+
+        <!-- Root Logger -->
+        <Root level="info">
+            <AppenderRef ref="Console"/>
+            <AppenderRef ref="FileLogger"/>
+            <AppenderRef ref="RollingFile"/>
+        </Root>
+
+    </Loggers>
+
+</Configuration>

@@ -1,0 +1,32 @@
+pipeline {
+    agent any
+
+    tools {
+        // Must match the name configured in 'Global Tool Configuration'
+        maven 'Maven 3.x'
+        jdk 'Java 17'
+    }
+
+    stages {
+        stage('Checkout') {
+            steps {
+                // Pulls the code from your repository
+                checkout scm
+            }
+        }
+
+        stage('Build & Test') {
+            steps {
+                // Runs unit / integration tests and compiles code
+                sh 'mvn clean test'
+            }
+        }
+    }
+
+    post {
+        always {
+            // Captures and displays JUnit or TestNG XML results in Jenkins
+            junit '**/target/surefire-reports/*.xml'
+        }
+    }
+}

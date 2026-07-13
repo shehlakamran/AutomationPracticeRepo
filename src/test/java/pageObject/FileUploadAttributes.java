@@ -4,6 +4,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.testng.asserts.SoftAssert;
 
 import java.util.List;
 
@@ -43,10 +44,14 @@ public class FileUploadAttributes {
     public void selectMultipleFiles(String path) {
         input_chooseMultiple.sendKeys(path);
         int numOfFiles = status_chooseMultiple.size();
-        if (numOfFiles == 1) {
+        int expectedNumOfFiles = 1;
+        SoftAssert softAssert = new SoftAssert();
+        softAssert.assertEquals(numOfFiles, expectedNumOfFiles);
+        softAssert.assertAll();
+       /* if (numOfFiles == 1) {
             System.out.println("Files upload successfully");
         } else {
             System.out.println("Files upload failed");
-        }
+        }*/
     }
 }

@@ -13,6 +13,7 @@ import java.util.List;
 
 public class BrokenLinksAttributes {
     WebDriver driver;
+
     //Attributes
     @FindBy(tagName = "a")
     List<WebElement> links;
